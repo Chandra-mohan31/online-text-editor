@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Online_Text_editor.Models;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text;
 
 namespace Online_Text_editor.Controllers
 {
@@ -83,6 +85,13 @@ namespace Online_Text_editor.Controllers
         // GET: DocumentController/Details/5
         public ActionResult Details(int id)
         {
+            return View(getDocument(id));
+        }
+        [HttpPost]
+        public ActionResult Details(int id,string action)
+        {
+            Console.WriteLine("triggered post function to download a file");
+            DownloadFile(id);
             return View(getDocument(id));
         }
 
@@ -203,7 +212,35 @@ namespace Online_Text_editor.Controllers
         // GET: DocumentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(getDocument(id));
+        }
+
+
+        // delete a document function
+        public void DeleteDocument(int documentId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(configuration.GetConnectionString("textEditorDB")))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = "DELETE FROM Document " +
+                                      "WHERE DocumentId = @DocumentId";
+
+                    cmd.Parameters.AddWithValue("@DocumentId", documentId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    Console.WriteLine($"Deleted {rowsAffected} rows from the Document table.");
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.WriteLine(se.Message);
+            }
         }
 
         // POST: DocumentController/Delete/5
@@ -213,12 +250,70 @@ namespace Online_Text_editor.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                DeleteDocument(id);
+                return RedirectToAction("ViewDocuments","Document");
+
             }
             catch
             {
                 return View();
             }
         }
+
+        public void DownloadFile(int documentId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(configuration.GetConnectionString("textEditorDB")))
+                {
+                    Console.WriteLine("trying to download document with id : " + documentId);
+                    Console.WriteLine($"trying to save file in path : {Path.GetTempPath()}");
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = "SELECT DocumentName, Content FROM Document " +
+                                      "WHERE DocumentId = @DocumentId";
+
+                    cmd.Parameters.AddWithValue("@DocumentId", documentId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string fileName = (string)reader["DocumentName"];
+                        string fileContentsString = (string)reader["Content"];
+                        fileName = fileName.Replace(" ", "_") + ".txt";
+                        Console.WriteLine(fileName);
+                        Console.WriteLine(fileContentsString);
+                        string filePath = Path.Combine(Path.GetFullPath(fileName), fileName);
+                        Console.WriteLine(filePath);
+                        StreamWriter writer = new StreamWriter(filePath);
+                        writer.WriteLine(fileContentsString);
+                        writer.Close();
+                        //byte[] fileContents = Encoding.UTF8.GetBytes(fileContentsString);
+
+                        // Save file to disk
+                        //string filePath = Path.Combine(Path.GetFullPath(fileName), fileName);
+                        //File(fileContents,"text");
+
+                        // Download file
+                        //FileStream stream = new FileStream(filePath, FileMode.Open);
+                        //return File(stream, "application/octet-stream", fileName);
+                    }
+                    else
+                    {
+                        //return NotFound();
+                    }
+                    conn.Close();
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.WriteLine(se.Message);
+                //return StatusCode(500);
+            }
+        }
+
     }
 }

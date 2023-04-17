@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\DELL\source\repos\Online-Text-editor
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/DELL/source/repos/Online-Text-editor/Views/Document/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DELL/source/repos/Online-Text-editor/Views/Document/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
