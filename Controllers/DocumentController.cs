@@ -290,21 +290,28 @@ namespace Online_Text_editor.Controllers
                         StreamWriter writer = new StreamWriter(filePath);
                         writer.WriteLine(fileContentsString);
                         writer.Close();
-                        //byte[] fileContents = Encoding.UTF8.GetBytes(fileContentsString);
+                        TempData["fileSaved"] = $"saved file in {filePath}";
+                        //trying to download instead of saving it
+                        //byte[] fileContents = Encoding.ASCII.GetBytes(fileContentsString);
 
-                        // Save file to disk
-                        //string filePath = Path.Combine(Path.GetFullPath(fileName), fileName);
-                        //File(fileContents,"text");
+                        //// Send file directly to the client for download
+                        //var cd = new System.Net.Mime.ContentDisposition
+                        //{
+                        //    FileName = fileName,
+                        //    Inline = false,
+                        //};
+                        //Response.Headers.Add("Content-Disposition", cd.ToString());
+                        //Response.ContentType = "text/plain";
+                        //return File(fileContents, "text/plain", fileName);
 
-                        // Download file
-                        //FileStream stream = new FileStream(filePath, FileMode.Open);
-                        //return File(stream, "application/octet-stream", fileName);
+
                     }
                     else
                     {
+                        Console.WriteLine("not found");
                         //return NotFound();
                     }
-                    conn.Close();
+                    //conn.Close();
                 }
             }
             catch (SqlException se)
@@ -313,6 +320,9 @@ namespace Online_Text_editor.Controllers
                 //return StatusCode(500);
             }
         }
+
+
+
 
     }
 }

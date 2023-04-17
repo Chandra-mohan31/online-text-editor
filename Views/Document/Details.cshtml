@@ -3,7 +3,14 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+@{
+    if (TempData["fileSaved"] != null)
+    {
+        <script>
+            alert("@TempData["fileSaved"].ToString()");
+        </script>
+    }
+}
 <h1>Document Details</h1>
 
 <div>
