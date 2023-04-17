@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HnFdqENBt8sjXe/LjUzczpH9mw6YQ9pBrXAtK4xvefsAIOnUK8BkOCWkTaTVs4TswQR0gJy00StNjx+O4Rkk/A==",
+  "dgSpecHash": "sXlNGPq5utQcP5jgTmVV0kzB8mzcdP7O1EM7476waEmRTr2zSiXjsl/I6yWkUXvLLfbwQgZDLd7GF4XtMwTExw==",
   "success": true,
   "projectFilePath": "C:\\Users\\DELL\\source\\repos\\Online-Text-editor\\Online-Text-editor.csproj",
   "expectedPackageFiles": [
@@ -167,7 +167,8 @@
     "C:\\Users\\DELL\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\DELL\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\DELL\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\tinymce\\6.4.1\\tinymce.6.4.1.nupkg.sha512"
   ],
   "logs": []
 }

@@ -4,6 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 
+    <script src="/lib/tinymce/tinymce.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: "#mytextarea"
+        });
+    </script>
 <h1>Edit</h1>
 
 <h4>DocumentModel</h4>
@@ -29,7 +35,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control"></textarea>
+                <textarea asp-for="Content" id="mytextarea" class="form-control"></textarea>
+                @*<textarea id="mytextarea">Hello, World!</textarea>*@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>

@@ -267,7 +267,6 @@ namespace Online_Text_editor.Controllers
                 using (SqlConnection conn = new SqlConnection(configuration.GetConnectionString("textEditorDB")))
                 {
                     Console.WriteLine("trying to download document with id : " + documentId);
-                    Console.WriteLine($"trying to save file in path : {Path.GetTempPath()}");
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand();
@@ -286,7 +285,7 @@ namespace Online_Text_editor.Controllers
                         fileName = fileName.Replace(" ", "_") + ".txt";
                         Console.WriteLine(fileName);
                         Console.WriteLine(fileContentsString);
-                        string filePath = Path.Combine(Path.GetFullPath(fileName), fileName);
+                        string filePath = Path.GetFullPath(fileName);
                         Console.WriteLine(filePath);
                         StreamWriter writer = new StreamWriter(filePath);
                         writer.WriteLine(fileContentsString);

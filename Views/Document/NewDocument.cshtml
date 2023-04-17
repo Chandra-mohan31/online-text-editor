@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "NewDocument";
 }
-
+<script src="/lib/tinymce/tinymce.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: "#mytextareanewdoc"
+    });
+</script>
 <h1>NewDocument</h1>
 
 <h4>DocumentModel</h4>
@@ -29,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control"></textarea>
+                <textarea asp-for="Content" id="mytextareanewdoc" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
